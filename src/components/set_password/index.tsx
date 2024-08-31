@@ -38,41 +38,38 @@ const SetPassword = (props: any) => {
   }
 
   return (
-    <div className="container">
-      <h1>Set Password</h1>
-      <p>This password is used to protect your wallet and provide access to the browser extension. It cannot be reset and is separate from your mobile wallet.</p>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="new-password">New password</label>
-        <input
-          type="password"
-          id="new-password"
-          value={newPassword}
-          onChange={handleInputChange}
-        />
-        <ul className="criteria">
+    <>
+      <div className="App">
+        <div className="flex-col">
+          <h1>Set Password</h1>
+          <p className="password-desc">This password is used to protect your wallet and provide access to the browser extension.</p>
+        </div>
+
+        <div className="form-group">
+          <label>New password</label>
+          <input type="password" value={newPassword}
+            onChange={handleInputChange} />
+        </div>
+        <ul className="password-criteria">
           <li className={hasEightCharacters ? 'valid' : 'invalid'}>8 or more characters</li>
           <li className={hasUppercaseLetter ? 'valid' : 'invalid'}>At least one uppercase letter</li>
           <li className={hasSymbol ? 'valid' : 'invalid'}>At least one symbol</li>
           <li className={hasDigit ? 'valid' : 'invalid'}>At least one digit</li>
+
         </ul>
-        <label htmlFor="confirm-password">Confirm new password</label>
-        <input
-          type="password"
-          id="confirm-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        <div className="form-group">
+          <label>Confirm new password</label>
+          <input type="password" value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)} />
+        </div>
         {error && <p className="error">Passwords do not match</p>}
-        <div className="terms">
-          <input type="checkbox" id="terms" />
-          <label htmlFor="terms">I have read and agree to the <a href="#">Terms of Service</a>.</label>
-        </div>
+
         <div className="buttons">
-          <button type="button" onClick={backHome}>Back</button>
-          <button type="submit">Next</button>
+          <button className="button" onClick={backHome}>Back</button>
+          <button className="button active" onClick={handleSubmit}>Next</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 

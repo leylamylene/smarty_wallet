@@ -19,5 +19,12 @@
   },
 
   "permissions": ["tabs", "alarms", "scripting", "webRequest"],
-  "host_permissions": ["*://*/*", "file:///*/*"]
+  "host_permissions": ["*://*/*", "file:///*/*"],
+
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["js/wasm/wasm_mod.js", "js/wasm/wasm_mod_bg.wasm"]
+    }
+  ]
 }

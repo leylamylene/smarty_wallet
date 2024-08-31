@@ -1,28 +1,24 @@
+import React from 'react';
 import './home.css';
-const Home = (props: any) => {
-  const logo = require('../../assets/logo.png');
-  return (
-    <div className="container">
-      <img src={logo} alt="Trust Wallet Logo" className="logo" />
-      <h1 className="welcome-text">Welcome to Smarty Wallet</h1>
-      <p className="description-text">The multi-chain wallet trusted by millions</p>
 
-      <button className="wallet-button" onClick={props.createWallet}>
-        <span className="button-icon">+</span> Create a new wallet
-        <p className="sub-title">Start fresh with a new wallet</p>
-      </button>
-      <button className="wallet-button" onClick={props.importWallet}>
-        <span className="button-icon">&#x21bb;</span> Import or recover wallet
-        <p className="sub-title">Import with your secret phrase</p>
-      </button>
-      <button className="wallet-button" onClick={props.connectLedger}>
-        <span className="button-icon">&#x1f4bb;</span>Ledger
-        <p className="sub-title">Connect your ledger wallet</p>
-      </button>
+function Home(props: any) {
+  return (
+    <div className="Home">
+      <header className="App-header">
+        <div className="balance-section">
+          <div className="logo">🌐 Internet Computer</div>
+          <div className="balance">100 ICP</div>
+          <div className="balance-usd">$39,092.22</div>
+        </div>
+        <div className="wallet-address">4246fd ... b812c8a</div>
+        <div className="buttons">
+          <button className="button receive">Receive</button>
+          <button className="button send">Send</button>
+        </div>
+        <button className="transactions-button">Transactions</button>
+      </header>
     </div>
   );
-};
-
-
+}
 
 export default Home;

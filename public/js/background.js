@@ -1,18 +1,28 @@
-import initWasmModule, { hello_wasm, request_handler } from "../pkg/wasm_mod.js";
+import initWasmModule, { request_handler } from "../pkg/wasm_mod.js";
 
 
-(async () => {
+async function listen() {
   await initWasmModule();
-  hello_wasm(); // this call logs a hello message from WASM for demo purposes
-  request_handler();
-})();
+  chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+    if (request?.action == "fetch_balance") {
+      request_handler().then(res => {
+        let balance = JSON.parse(res).result;
+        balance = parseInt(balance, 16) / 1000000000000000000;
+        balance = balance.toFixed(4);
+        chrome.runtime.sendMessage(balance).then(onSuccess, onError);
+      });
+    }
+  });
+}
+listen();
 
-// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//   console.log("Message received:", message);
-//   console.log("Sender:", sender);
+function onSuccess(message) {
+  console.log(`Send OK: ${JSON.stringify(message)}`);
+}
 
-//   // Handle the message and send a response
-//   if (message.greeting === "hello") {
-//     sendResponse({ farewell: "goodbye" });
-//   }
-// });
+// A placeholder for OnError in .then
+function onError(error) {
+  console.error(`Promise error: ${error}`);
+}
+
+

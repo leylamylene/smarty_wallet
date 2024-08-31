@@ -20,7 +20,7 @@ pub fn hello_wasm() {
 }
 
 #[wasm_bindgen]
-pub async fn request_handler() {
+pub async fn request_handler() -> String {
     let address = "0xD9792383eF5A1B553e50072A0229d4447143fD82";
     let payload  = json!({
       "jsonrpc": "2.0",
@@ -30,13 +30,10 @@ pub async fn request_handler() {
   });
   
     let client = Client::new();
-  
     let url = SEPOLIA_END_POINT;
-
     let response = client.post(url).json(&payload).send().await;
     let body = response.unwrap().text().await;
-    log(&body.unwrap().as_str());
-    // report_progress(body.unwrap().as_str());
+    body.unwrap().to_string()
        
 }
 
