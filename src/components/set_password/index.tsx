@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './set_password.css';
+import CryptoJS from 'crypto-js';
 
 const SetPassword = (props: any) => {
   const [newPassword, setNewPassword] = useState('');
@@ -10,13 +11,26 @@ const SetPassword = (props: any) => {
   const [hasSymbol, setHasSymbol] = useState(false);
   const [hasDigit, setHasDigit] = useState(false);
 
+  useEffect(() => {
+    // Fetch the JSON data from a file or API
+  }, []);
+
+
+
+  // Retrieve and decrypt password
+  const decryptPass = () => {
+    chrome.storage.sync.get(['password'], function (result) {
+      const decryptedPassword = CryptoJS.AES.decrypt(result.password, 'secretKey').toString(CryptoJS.enc.Utf8);
+      console.log('Decrypted password is ' + decryptedPassword);
+    });
+  }
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
       setError(true);
     } else {
       setError(false);
-      // Handle form submission
+
     }
   };
 
@@ -47,7 +61,7 @@ const SetPassword = (props: any) => {
 
         <div className="form-group">
           <label>New password</label>
-          <input type="password" value={newPassword}
+          <input type="password" id="password_set_pass" value={newPassword}
             onChange={handleInputChange} />
         </div>
         <ul className="password-criteria">
@@ -59,14 +73,14 @@ const SetPassword = (props: any) => {
         </ul>
         <div className="form-group">
           <label>Confirm new password</label>
-          <input type="password" value={confirmPassword}
+          <input type="password" id="conf_password_set_pass" value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)} />
         </div>
         {error && <p className="error">Passwords do not match</p>}
 
         <div className="buttons">
           <button className="button" onClick={backHome}>Back</button>
-          <button className="button active" onClick={handleSubmit}>Next</button>
+          <button className="button active" id="submit_set_pass" onClick={handleSubmit}>Next</button>
         </div>
       </div>
     </>
