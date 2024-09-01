@@ -30,7 +30,10 @@ const SetPassword = (props: any) => {
       setError(true);
     } else {
       setError(false);
-
+      // setTimeout(() => {
+      //   props.SetShownComponent('BuckUpPhrase');
+      // }, 2000);
+      // 
     }
   };
 

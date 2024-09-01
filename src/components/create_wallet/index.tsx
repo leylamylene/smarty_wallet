@@ -4,7 +4,6 @@ const CreateWallet = (props: any) => {
   return (
     <div className="content">
       <div className="logo">Smarty Wallet</div>
-      <div className="tagline">The multi-chain wallet trusted by millions</div>
       <div className="action-container">
         <button className="button-primary" onClick={props.createWallet}>Create a wallet</button>
         <button className="button-secondary" onClick={props.importWallet}>Or Import Your Seed Phrase</button>

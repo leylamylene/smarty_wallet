@@ -1,3 +1,4 @@
+import BuckUpPhrase from './components/backup_phrase';
 import CreateWallet from './components/create_wallet';
 import Home from './components/home';
 import SecretPhraseImport from './components/secret_phrase';
@@ -27,6 +28,7 @@ function App() {
       {shownCompoenent === 'SetPassword' && <SetPassword SetShownComponent={SetShownComponent} />}
       {shownCompoenent === 'Home' && <Home SetShownComponent={SetShownComponent} />}
       {shownCompoenent === 'SecretPhraseImport' && <SecretPhraseImport SetShownComponent={SetShownComponent} />}
+      {shownCompoenent === 'BuckUpPhrase' && <BuckUpPhrase SetShownComponent={SetShownComponent} />}
 
     </>
 
