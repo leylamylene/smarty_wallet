@@ -24,7 +24,7 @@ function App() {
   return (
 
     <>
-      {shownCompoenent === 'CreateWallet' && <CreateWallet createWallet={createWallet} importWallet={importWallet} connectLedger={connectLedger} />}
+      {shownCompoenent === 'CreateWallet' && <CreateWallet createWallet={createWallet} SetShownComponent={SetShownComponent} />}
       {shownCompoenent === 'SetPassword' && <SetPassword SetShownComponent={SetShownComponent} />}
       {shownCompoenent === 'Home' && <Home SetShownComponent={SetShownComponent} />}
       {shownCompoenent === 'SecretPhraseImport' && <SecretPhraseImport SetShownComponent={SetShownComponent} />}

@@ -3,14 +3,15 @@ import './home.css';
 
 function Home(props: any) {
   return (
-    <div className="Home">
-      <header className="App-header">
+    <div className="Home" id="home">
+      <div className="fixed-top">
+        <div className="wallet-address" id="my_wallet_address"></div>
         <div className="balance-section">
-          <div className="logo">🌐 Internet Computer</div>
-          <div className="balance">100 ICP</div>
-          <div className="balance-usd">$39,092.22</div>
+          <div className="logo">🌐 Sepolia Network</div>
+          <div className="balance" id="my_balance"></div>
         </div>
-        <div className="wallet-address">4246fd ... b812c8a</div>
+      </div>
+      <header className="App-header">
         <div className="buttons">
           <button className="button receive">Receive</button>
           <button className="button send">Send</button>

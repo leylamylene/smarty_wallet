@@ -1,10 +1,10 @@
-import initWasmModule, { request_handler, encrypt_password } from "../pkg/wasm_mod.js";
+import initWasmModule, { request_handler, encrypt_password, create_wallet, get_wallet_address, get_wallet_mnemonic } from "../pkg/wasm_mod.js";
 
 
 async function listen() {
   await initWasmModule();
   chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-    if (request?.action == "fetch_balance") {
+    if (request?.action === "fetch_balance") {
       console.log('fetch balannnnnnnnnnce');
       request_handler().then(res => {
         let balance = JSON.parse(res).result;
@@ -13,30 +13,37 @@ async function listen() {
         chrome.runtime.sendMessage({ action: "balance", params: balance }).then(onSuccess, onError);
       });
     }
-    if (request?.action == "encryptPassword") {
+    if (request?.action === "encryptPassword") {
       encrypt_password(request.params).then(res => {
-        chrome.storage.local.set({ "password": res }, () => {
-          chrome.runtime.sendMessage({ action: "password", params: res });
-          if (sendResponse) sendResponse();
-        });
+        chrome.runtime.sendMessage({ action: "password", params: res }).then(onSuccess, onError);
+      });
+      create_wallet().then(res => {
+        chrome.runtime.sendMessage({ action: "create_wallet", params: res });
+      });
+    }
 
-      })
+
+    if (request?.action === "get_wallet_address") {
+      get_wallet_address(request?.params).then(wallet_address => {
+        chrome.runtime.sendMessage({ action: "wallet_address", params: wallet_address });
+      });
+
+    }
+
+    if (request?.action === "get_wallet_mnemonic") {
+      get_wallet_mnemonic(request?.params).then(wallet_mnemonic => {
+        chrome.runtime.sendMessage({ action: "wallet_mnemonic", params: wallet_mnemonic });
+      });
+
     }
   });
-
-
-
 }
 
 listen();
 
 function onSuccess(message) {
-  console.log(`Send OK: ${JSON.stringify(message)}`);
 }
 
 // A placeholder for OnError in .then
 function onError(error) {
-  console.error(`Promise error: ${error}`);
 }
-
-

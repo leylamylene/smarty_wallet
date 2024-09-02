@@ -1,6 +1,20 @@
+import { useEffect, useState } from 'react';
 import './create_wallet.css';
 const CreateWallet = (props: any) => {
   const logo = require('../../assets/logo.png');
+  const [isWalletExist, setIsWalletExist] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("wallet")) {
+      setIsWalletExist(true)
+    }
+
+  }, []);
+
+  useEffect(() => {
+    if (isWalletExist) {
+      props.SetShownComponent("Home");
+    }
+  }, [isWalletExist]);
   return (
     <div className="content">
       <div className="logo">Smarty Wallet</div>

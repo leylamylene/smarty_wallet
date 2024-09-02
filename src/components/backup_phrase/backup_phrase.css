@@ -60,11 +60,14 @@ input[type="checkbox"] {
 }
 
 .pass-phrase {
-  background-color: gray;
+  background-color: #c4c3c5;
   height: 100px;
   border-radius: 10px;
+  font-size: 16px;
+  color: black;
 }
 
-.wallet-address {
-  color: white;
+.pin-wallet {
+  font-size: 14px;
+  color: #1e88e5;
 }

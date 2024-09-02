@@ -48,7 +48,7 @@ pub async fn encrypt_password(password :String)-> String {
     
 
 #[wasm_bindgen]
-pub  fn decrypt_password(encrypted_password :String)-> String {
+pub async fn decrypt_password(encrypted_password :String)-> String {
     let mc = new_magic_crypt!("my_secret_key", 256);
     mc.decrypt_base64_to_string(&encrypted_password).unwrap()
 }
@@ -56,7 +56,7 @@ pub  fn decrypt_password(encrypted_password :String)-> String {
 
 
 #[wasm_bindgen]
-pub  fn create_wallet() -> String {
+pub async fn create_wallet() -> String {
    let mnemonic =  wallet::generate_pass_phrase();
    let mnemonic_string = mnemonic.phrase().to_string();
     let (secret_key,public_key) = wallet::generate_key_pair(&mnemonic);
@@ -68,14 +68,14 @@ pub  fn create_wallet() -> String {
 
 
 #[wasm_bindgen]
-pub fn get_wallet_address(wallet_string: String)->String{
+pub async fn get_wallet_address(wallet_string: String)->String{
     // Deserialize the JSON string back to the struct
     let wallet: wallet::Wallet = serde_json::from_str(&wallet_string).unwrap();
     wallet.get_wallet_address()
 }
 
 #[wasm_bindgen]
-pub  fn get_wallet_mnemonic(wallet_string: String)->String{
+pub async fn get_wallet_mnemonic(wallet_string: String)->String{
     
     let wallet: wallet::Wallet = serde_json::from_str(&wallet_string).unwrap();
     wallet.get_wallet_mnemonic()
