@@ -3,13 +3,15 @@ use reqwest::Client;
 use serde_json::json;
 use wasm_bindgen::prelude::*;
 mod env;
-use env::{SEPOLIA_END_POINT ,MAINNET_END_POINT};
+use env::{SEPOLIA_END_POINT };
 use magic_crypt::{new_magic_crypt, MagicCryptTrait};
 mod wallet;
 use wallet::*;
-use std::fs::File;
-use std::io::{Write, Read};
-use std::io::read_to_string;
+mod utils;
+use utils::*;
+
+
+
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace=console)]
@@ -23,8 +25,7 @@ pub fn hello_wasm() {
 }
 
 #[wasm_bindgen]
-pub async fn request_handler() -> String {
-    let address = "0xD9792383eF5A1B553e50072A0229d4447143fD82";
+pub async fn get_balance(address:&str) -> String {
     let payload  = json!({
       "jsonrpc": "2.0",
       "method": "eth_getBalance",

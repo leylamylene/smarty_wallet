@@ -1,4 +1,3 @@
-extern crate bip39;
 use core::fmt;
 use serde::{Deserialize, Serialize};
 use bip39::{Mnemonic , MnemonicType , Language,Seed};
@@ -8,7 +7,6 @@ pub fn generate_pass_phrase()->Mnemonic {
   Mnemonic::new(MnemonicType::Words12 , Language::English)
 
 }
-
 
 pub fn generate_key_pair(mnemonic : &Mnemonic)->(SecretKey,PublicKey) {
 
@@ -45,7 +43,7 @@ impl Wallet {
   pub fn new(secret_key :&SecretKey ,public_key :&PublicKey) -> Self {
     let addr = generate_wallet_address(public_key);
     Wallet {
-      secret_key : format!("{:?}" , secret_key.display_secret()),
+      secret_key : secret_key.to_string(),
       public_key : public_key.to_string(),
       public_address : addr,
       mnemonic : String::new()
