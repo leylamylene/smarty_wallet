@@ -6,7 +6,7 @@ import SetPassword from './components/set_password';
 import { useState } from 'react';
 function App() {
 
-  const [shownCompoenent, SetShownComponent] = useState('CreateWallet');
+  const [shownCompoenent, SetShownComponent] = useState('Home');
   const createWallet = () => {
     SetShownComponent('SetPassword');
   };
