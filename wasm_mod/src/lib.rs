@@ -7,8 +7,6 @@ use env::{SEPOLIA_END_POINT };
 use magic_crypt::{new_magic_crypt, MagicCryptTrait};
 mod wallet;
 use wallet::*;
-mod utils;
-use utils::*;
 
 
 

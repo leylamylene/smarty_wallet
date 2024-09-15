@@ -11,13 +11,7 @@ function Home(props: any) {
           <div className="balance" id="my_balance"></div>
         </div>
       </div>
-      <header className="App-header">
-        <div className="buttons">
-          <button className="button receive">Receive</button>
-          <button className="button send">Send</button>
-        </div>
-        <button className="transactions-button">Transactions</button>
-      </header>
+
     </div>
   );
 }
